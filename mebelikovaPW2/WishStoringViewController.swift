@@ -49,7 +49,6 @@ final class WishStoringViewController: UIViewController {
         // table.delegate = self
         defaults.array(forKey: Constants.wishesKey)
     }
-
 }
 
 // MARK: - UITableViewDataSource
