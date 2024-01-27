@@ -249,7 +249,6 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         present(WishStoringViewController(), animated: true)
     }
     
-    
     // - MARK: Configure Schedule Wish
     private func configureScheduleWishButton() {
         view.addSubview(scheduleWishesButton)
@@ -262,9 +261,16 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         scheduleWishesButton.setTitleColor(accentColor, for: .normal)
         scheduleWishesButton.setTitle(Constants.scheduleWishButtonText, for: .normal)
         scheduleWishesButton.layer.cornerRadius = Constants.buttonRadius
-        // addWishButton.addTarget(self, action:  #selector(addWishButtonPressed), for: .touchUpInside)
+        scheduleWishesButton.addTarget(self, action:  #selector(scheduleWishButtonPressed), for: .touchUpInside)
     }
     
+    @objc
+    private func scheduleWishButtonPressed() {
+        let vc = WishCalendarViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // - MARK: Change Accent Color
     private func changeAccentColorAndShow(newColor: UIColor) {
         accentColor = newColor
         view.backgroundColor = accentColor

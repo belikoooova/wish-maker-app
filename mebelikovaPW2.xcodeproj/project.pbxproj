@@ -18,6 +18,7 @@
 		4AB734802AC5E1ED00139623 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7347F2AC5E1ED00139623 /* CustomSlider.swift */; };
 		4AB734822AC6027F00139623 /* UIView+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB734812AC6027F00139623 /* UIView+Pin.swift */; };
 		4AB734842AC6106F00139623 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB734832AC6106F00139623 /* UIColor+HEX.swift */; };
+		4AEA56AE2B65661A006BFC59 /* WishCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA56AD2B65661A006BFC59 /* WishCalendarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		4AB7347F2AC5E1ED00139623 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		4AB734812AC6027F00139623 /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
 		4AB734832AC6106F00139623 /* UIColor+HEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HEX.swift"; sourceTree = "<group>"; };
+		4AEA56AD2B65661A006BFC59 /* WishCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishCalendarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				4AB7346B2AC5C8B600139623 /* AppDelegate.swift */,
 				4AB7346D2AC5C8B600139623 /* SceneDelegate.swift */,
+				4AEA56AD2B65661A006BFC59 /* WishCalendarViewController.swift */,
 				4AB7346F2AC5C8B600139623 /* WishMakerViewController.swift */,
 				4AB734742AC5C8B800139623 /* Assets.xcassets */,
 				4AB734762AC5C8B800139623 /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 			files = (
 				4A03EBC62AFCFAD20056F46C /* WrittenWishCell.swift in Sources */,
 				4AB734822AC6027F00139623 /* UIView+Pin.swift in Sources */,
+				4AEA56AE2B65661A006BFC59 /* WishCalendarViewController.swift in Sources */,
 				4AB734842AC6106F00139623 /* UIColor+HEX.swift in Sources */,
 				4AB734702AC5C8B600139623 /* WishMakerViewController.swift in Sources */,
 				4AB7346C2AC5C8B600139623 /* AppDelegate.swift in Sources */,
