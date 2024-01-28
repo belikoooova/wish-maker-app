@@ -26,6 +26,8 @@ final class WishCalendarViewController: UIViewController {
         static let shadowRadius: CGFloat = 5
         static let shadowOffset: CGSize = CGSize(width: 3, height: 3)
         static let shadowColor: CGColor = UIColor.black.cgColor
+        
+        static let eventsKey: String = "Events"
     }
     
     // MARK: - Fields
@@ -34,13 +36,26 @@ final class WishCalendarViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    private var events: [WishEventModel] = []
+    private let defaults = UserDefaults.standard
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = WishMakerViewController.accentColor
         configureAddButton()
         configureCollection()
-        view.backgroundColor = WishMakerViewController.accentColor
+        loadEvents()
+    }
+    
+    private func loadEvents() {
+        let decoder = JSONDecoder()
+        if let savedEvents = UserDefaults.standard.object(forKey: Constants.eventsKey) as? Data,
+           let loadedEvents = try? decoder.decode([WishEventModel].self, from: savedEvents) {
+            events = loadedEvents
+            return
+        }
+        events = []
     }
     
     // MARK: - Configure Add Button
@@ -60,12 +75,26 @@ final class WishCalendarViewController: UIViewController {
         addButton.layer.shadowRadius = Constants.shadowRadius
         addButton.layer.shadowOffset = Constants.shadowOffset
         addButton.layer.shadowColor = Constants.shadowColor
+        
         addButton.addTarget(self, action:  #selector(addButtonPressed), for: .touchUpInside)
     }
     
     @objc
     private func addButtonPressed() {
-        present(WishEventCreationView(), animated: true)
+        let creationView = WishEventCreationView()
+        creationView.onSave = { [weak self] newEvent in
+            self?.addNewEvent(newEvent)
+        }
+        present(creationView, animated: true)
+    }
+    
+    private func addNewEvent(_ event: WishEventModel) {
+        events.append(event)
+        collectionView.reloadData()
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(events) {
+            UserDefaults.standard.set(encoded, forKey: Constants.eventsKey)
+        }
     }
     
     // MARK: - Configure Collection
@@ -82,6 +111,7 @@ final class WishCalendarViewController: UIViewController {
             WishEventCell.self,
             forCellWithReuseIdentifier: WishEventCell.reuseId
         )
+        defaults.array(forKey: Constants.eventsKey)
         
         view.addSubview(collectionView)
         collectionView.pinHorizontal(to: view)
@@ -104,27 +134,22 @@ extension WishCalendarViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return Constants.numberOfCollectionCells
+        return events.count
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-                                                        WishEventCell.reuseId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WishEventCell.reuseId, for: indexPath)
         
         guard let wishEventCell = cell as? WishEventCell else {
             return cell
         }
-        wishEventCell.configure(
-            with: WishEventModel(
-                title: "Test",
-                description: "Test description",
-                startDate: "Start date",
-                endDate: "End date"
-            )
-        )
+        
+        let event = events[indexPath.row]
+        wishEventCell.configure(with: event)
+        
         return cell
     }
 }

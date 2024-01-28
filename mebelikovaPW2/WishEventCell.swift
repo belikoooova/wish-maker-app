@@ -35,6 +35,8 @@ final class WishEventCell: UICollectionViewCell {
         static let shadowRadius: CGFloat = 5
         static let shadowOffset: CGSize = CGSize(width: 3, height: 3)
         static let shadowColor: CGColor = UIColor.black.cgColor
+        
+        static let dateStyle: DateFormatter.Style = .medium
     }
     
     // MARK: - Fields
@@ -46,9 +48,12 @@ final class WishEventCell: UICollectionViewCell {
     private let startDateLabel: UILabel = UILabel()
     private let endDateLabel: UILabel = UILabel()
     
+    private let dateFormatter: DateFormatter = DateFormatter()
+    
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
+        dateFormatter.dateStyle = Constants.dateStyle
         configureWrap()
         configureTitleLabel()
         configureDescriptionLabel()
@@ -65,8 +70,8 @@ final class WishEventCell: UICollectionViewCell {
     func configure(with event: WishEventModel) {
         titleLabel.text = event.title
         descriptionLabel.text = event.description
-        startDateLabel.text = "Start Date: \(event.startDate)"
-        endDateLabel.text = "End Date: \(event.endDate)"
+        startDateLabel.text = "Start Date: \(dateFormatter.string(from: event.startDate))"
+        endDateLabel.text = "End Date: \(dateFormatter.string(from: event.endDate))"
     }
     
     // MARK: - UI Configuration

@@ -43,6 +43,7 @@ final class WishStoringViewController: UIViewController {
         }
     }
     
+    // MARK: - Configure Table
     private func configureTable() {
         view.addSubview(table)
         table.backgroundColor = .black
