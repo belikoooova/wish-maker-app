@@ -48,12 +48,12 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         
         static let addWishButtonText: String = "Add more wishes"
         static let addWishButtonBottom: CGFloat = 10
-        static let addWishButtonSide: CGFloat = 20
+        static let addWishButtonSide: CGFloat = 10
         static let addWishButtonHeight: CGFloat = 45
         
         static let scheduleWishButtonText: String = "Schedule wish granting"
-        static let scheduleWishButtonBottom: CGFloat = 20
-        static let scheduleWishButtonSide: CGFloat = 20
+        static let scheduleWishButtonBottom: CGFloat = 10
+        static let scheduleWishButtonSide: CGFloat = 10
         static let scheduleWishButtonHeight: CGFloat = 45
         
         static let buttonRadius: CGFloat = 10
@@ -73,7 +73,7 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
     let colorPickerButton = UIButton(type: .system)
     private let addWishButton: UIButton = UIButton(type: .system)
     private let scheduleWishesButton: UIButton = UIButton(type: .system)
-    private var accentColor: UIColor = .black
+    static var accentColor: UIColor = .black
     
     // - MARK: Main
     override func viewDidLoad() {
@@ -83,7 +83,7 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
     
     // - MARK: ConfigureUI
     private func configureUI() {
-        view.backgroundColor = accentColor
+        view.backgroundColor = WishMakerViewController.accentColor
         configureTitle()
         configureDescription()
         configureScheduleWishButton()
@@ -177,7 +177,7 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         randomColorButton.translatesAutoresizingMaskIntoConstraints = false
         randomColorButton.backgroundColor = Constants.buttonColor
         randomColorButton.setTitle(Constants.randomButtonText, for: .normal)
-        randomColorButton.setTitleColor(accentColor, for: .normal)
+        randomColorButton.setTitleColor(WishMakerViewController.accentColor, for: .normal)
         randomColorButton.addTarget(self, action: #selector(randomButtonTouched(_:)), for: .touchUpInside)
         
         view.addSubview(randomColorButton)
@@ -198,7 +198,7 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         colorPickerButton.translatesAutoresizingMaskIntoConstraints = false
         colorPickerButton.backgroundColor = Constants.buttonColor
         colorPickerButton.setTitle(Constants.colorPickerText, for: .normal)
-        colorPickerButton.setTitleColor(accentColor, for: .normal)
+        colorPickerButton.setTitleColor(WishMakerViewController.accentColor, for: .normal)
         view.addSubview(colorPickerButton)
         colorPickerButton.pinBottom(to: randomColorButton.topAnchor, Constants.colorPickerBottom)
         colorPickerButton.setWidth(Constants.colorPickerWidth)
@@ -238,7 +238,7 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         addWishButton.pinHorizontal(to: view, Constants.addWishButtonSide)
         
         addWishButton.backgroundColor = Constants.buttonColor
-        addWishButton.setTitleColor(accentColor, for: .normal)
+        addWishButton.setTitleColor(WishMakerViewController.accentColor, for: .normal)
         addWishButton.setTitle(Constants.addWishButtonText, for: .normal)
         addWishButton.layer.cornerRadius = Constants.buttonRadius
         addWishButton.addTarget(self, action:  #selector(addWishButtonPressed), for: .touchUpInside)
@@ -254,11 +254,11 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
         view.addSubview(scheduleWishesButton)
         scheduleWishesButton.translatesAutoresizingMaskIntoConstraints = false;
         scheduleWishesButton.setHeight(Constants.scheduleWishButtonHeight)
-        scheduleWishesButton.pinBottom(to: view, Constants.scheduleWishButtonBottom)
+        scheduleWishesButton.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, Constants.scheduleWishButtonBottom)
         scheduleWishesButton.pinHorizontal(to: view, Constants.scheduleWishButtonSide)
         
         scheduleWishesButton.backgroundColor = Constants.buttonColor
-        scheduleWishesButton.setTitleColor(accentColor, for: .normal)
+        scheduleWishesButton.setTitleColor(WishMakerViewController.accentColor, for: .normal)
         scheduleWishesButton.setTitle(Constants.scheduleWishButtonText, for: .normal)
         scheduleWishesButton.layer.cornerRadius = Constants.buttonRadius
         scheduleWishesButton.addTarget(self, action:  #selector(scheduleWishButtonPressed), for: .touchUpInside)
@@ -272,10 +272,10 @@ class WishMakerViewController: UIViewController, UIColorPickerViewControllerDele
     
     // - MARK: Change Accent Color
     private func changeAccentColorAndShow(newColor: UIColor) {
-        accentColor = newColor
-        view.backgroundColor = accentColor
+        WishMakerViewController.accentColor = newColor
+        view.backgroundColor = WishMakerViewController.accentColor
         for button in [randomColorButton, addWishButton, scheduleWishesButton, colorPickerButton] {
-            button.setTitleColor(accentColor, for: .normal)
+            button.setTitleColor(WishMakerViewController.accentColor, for: .normal)
         }
     }
 }

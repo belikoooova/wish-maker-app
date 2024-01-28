@@ -21,6 +21,7 @@
 		4AEA56AE2B65661A006BFC59 /* WishCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA56AD2B65661A006BFC59 /* WishCalendarViewController.swift */; };
 		4AEA56B02B656FE2006BFC59 /* WishEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA56AF2B656FE2006BFC59 /* WishEventCell.swift */; };
 		4AEA56B22B657655006BFC59 /* WishEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA56B12B657655006BFC59 /* WishEventModel.swift */; };
+		4AEA56B42B669DDD006BFC59 /* WishEventCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA56B32B669DDD006BFC59 /* WishEventCreationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		4AEA56AD2B65661A006BFC59 /* WishCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishCalendarViewController.swift; sourceTree = "<group>"; };
 		4AEA56AF2B656FE2006BFC59 /* WishEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishEventCell.swift; sourceTree = "<group>"; };
 		4AEA56B12B657655006BFC59 /* WishEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishEventModel.swift; sourceTree = "<group>"; };
+		4AEA56B32B669DDD006BFC59 /* WishEventCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishEventCreationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				4AB7346B2AC5C8B600139623 /* AppDelegate.swift */,
 				4AEA56AF2B656FE2006BFC59 /* WishEventCell.swift */,
 				4AEA56B12B657655006BFC59 /* WishEventModel.swift */,
+				4AEA56B32B669DDD006BFC59 /* WishEventCreationView.swift */,
 				4AB7346D2AC5C8B600139623 /* SceneDelegate.swift */,
 				4AEA56AD2B65661A006BFC59 /* WishCalendarViewController.swift */,
 				4AB7346F2AC5C8B600139623 /* WishMakerViewController.swift */,
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A03EBC62AFCFAD20056F46C /* WrittenWishCell.swift in Sources */,
+				4AEA56B42B669DDD006BFC59 /* WishEventCreationView.swift in Sources */,
 				4AB734822AC6027F00139623 /* UIView+Pin.swift in Sources */,
 				4AEA56AE2B65661A006BFC59 /* WishCalendarViewController.swift in Sources */,
 				4AEA56B02B656FE2006BFC59 /* WishEventCell.swift in Sources */,

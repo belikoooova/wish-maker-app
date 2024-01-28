@@ -27,13 +27,20 @@ final class WishStoringViewController: UIViewController {
     private let table: UITableView = UITableView(frame: .zero)
     private var wishArray: [String] = ["I wish to add cells to the table"]
     private let defaults = UserDefaults.standard
-    //
     private var editingWishIndex: Int?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = .black
         configureTable()
+        loadWishes()
+    }
+    
+    private func loadWishes() {
+        if let savedWishes = defaults.object(forKey: Constants.wishesKey) as? [String] {
+            wishArray = savedWishes
+        }
     }
     
     private func configureTable() {
