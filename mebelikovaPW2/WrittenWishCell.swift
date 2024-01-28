@@ -19,6 +19,7 @@ final class WrittenWishCell: UITableViewCell {
     
     // MARK: - Fields
     static let reuseId: String = "WrittenWishCell"
+    
     private let wishLabel: UILabel = UILabel()
     var onCellTapped: ((String) -> Void)?
    
