@@ -39,7 +39,7 @@ final class AddWishCell: UITableViewCell, UITextViewDelegate {
     private let addButton: UIButton = UIButton(type: .system)
     let addedText: UITextField = UITextField()
     var addWish: ((String) -> ())?
-   
+    
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -70,7 +70,7 @@ final class AddWishCell: UITableViewCell, UITextViewDelegate {
         wrap.layer.cornerRadius = Constants.wrapRadius
         wrap.pinVertical(to: self, Constants.wrapOffsetV)
         wrap.pinHorizontal(to: self, Constants.wrapOffsetH)
-    
+        
         wrap.layer.shadowOpacity = Constants.shadowOpacity
         wrap.layer.shadowRadius = Constants.shadowRadius
         wrap.layer.shadowOffset = Constants.shadowOffset

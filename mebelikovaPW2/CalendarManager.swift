@@ -22,14 +22,14 @@ final class CalendarManager: CalendarManaging {
     }
     
     private let eventStore: EKEventStore = EKEventStore()
-
+    
     func create(eventModel: WishEventModel, completion: @escaping (Bool) -> Void) {
         eventStore.requestAccess(to: .event) { [weak self] granted, error in
             guard let self = self, granted, error == nil else {
                 completion(false)
                 return
             }
-
+            
             let event = EKEvent(eventStore: self.eventStore)
             event.title = eventModel.title
             event.startDate = eventModel.startDate
@@ -46,16 +46,16 @@ final class CalendarManager: CalendarManaging {
             }
         }
     }
-
+    
     func createEventSynchronously(eventModel: WishEventModel) -> Bool {
         let semaphore = DispatchSemaphore(value: 0)
         var result: Bool = false
-
+        
         create(eventModel: eventModel) { success in
             result = success
             semaphore.signal()
         }
-
+        
         semaphore.wait()
         return result
     }

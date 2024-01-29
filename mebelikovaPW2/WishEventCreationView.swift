@@ -64,6 +64,8 @@ final class WishEventCreationView: UIViewController {
     private let endDatePickerLabel = UILabel()
     private let endDatePicker = UIDatePicker()
     private let saveButton = UIButton()
+    private let titlePickerView = UIPickerView()
+    private var titleOptions: [String] = []
     
     var onSave: ((WishEventModel) -> Void)?
     
@@ -71,15 +73,14 @@ final class WishEventCreationView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = WishMakerViewController.accentColor
+        titleOptions = WishStoringViewController.wishArray
         configureUI()
-        // configureTextFields()
-        // configureSaveButton()
     }
     
     private func configureUI() {
         configureWindowTitle()
         
-        configureTextFieldLabel(label: titleTextFieldLabel, title: Constants.titleTextFieldLabelText, pin: windowTitleLabel, shift: Constants.titleTextFieldLabelTop)
+        configureTitleTextField()
         configureTextField(textField: titleTextField, placeholder: Constants.titleTextFieldPlaceholder, pin: titleTextFieldLabel)
         
         configureTextFieldLabel(label: descriptionTextFieldLabel, title: Constants.descriptionTextFieldLabelText, pin: titleTextField, shift: Constants.textFieldLabelTop)
@@ -92,11 +93,6 @@ final class WishEventCreationView: UIViewController {
         configureEndDatePicker()
         
         configureSaveButton()
-        
-        // Настройка кнопки сохранения
-        //saveButton.setTitle("Save", for: .normal)
-        //saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        // Добавьте элементы на view и установите их constraints
     }
     
     // - MARK: Configure Window Title
@@ -110,6 +106,39 @@ final class WishEventCreationView: UIViewController {
         view.addSubview(windowTitleLabel)
         windowTitleLabel.pinCenterX(to: view)
         windowTitleLabel.pinTop(to: view.safeAreaLayoutGuide.topAnchor, Constants.windowTitleLabelTop)
+    }
+    
+    // - Configure Title TextField
+    private func configureTitleTextField() {
+        configureTextFieldLabel(label: titleTextFieldLabel, title: Constants.titleTextFieldLabelText, pin: windowTitleLabel, shift: Constants.titleTextFieldLabelTop)
+        
+        let toolbar = UIToolbar()
+        view.addSubview(toolbar)
+        toolbar.sizeToFit()
+        toolbar.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor)
+        
+        let selectButton = UIBarButtonItem(title: "Choose...", style: .plain, target: self, action: #selector(selectTitle))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissTitlePicker))
+        
+        toolbar.setItems([selectButton, flexSpace, doneButton], animated: true)
+        
+        titleTextField.inputAccessoryView = toolbar
+        
+        titlePickerView.delegate = self
+        titlePickerView.dataSource = self
+    }
+    
+    @objc private func selectTitle() {
+        titleTextField.resignFirstResponder()
+        titleTextField.inputView = titlePickerView
+        titlePickerView.reloadAllComponents()
+        titleTextField.becomeFirstResponder()
+    }
+    
+    @objc private func dismissTitlePicker() {
+        titleTextField.inputView = nil
+        titleTextField.resignFirstResponder()
     }
     
     // - MARK: Configure TextField Label
@@ -172,7 +201,6 @@ final class WishEventCreationView: UIViewController {
     }
     
     //- MARK: Configure Save Button
-    
     private func configureSaveButton() {
         view.addSubview(saveButton)
         saveButton.translatesAutoresizingMaskIntoConstraints = false;
@@ -205,5 +233,24 @@ final class WishEventCreationView: UIViewController {
         element.layer.shadowRadius = Constants.shadowRadius
         element.layer.shadowOffset = Constants.shadowOffset
         element.layer.shadowColor = Constants.shadowColor
+    }
+}
+
+// - MARK: UIPicker Extension
+extension WishEventCreationView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return titleOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return titleOptions[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        titleTextField.text = titleOptions[row]
     }
 }

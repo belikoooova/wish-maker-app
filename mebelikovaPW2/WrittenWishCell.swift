@@ -27,7 +27,7 @@ final class WrittenWishCell: UITableViewCell {
     
     private let wishLabel: UILabel = UILabel()
     var onCellTapped: ((String) -> Void)?
-   
+    
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
