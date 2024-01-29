@@ -32,7 +32,7 @@ extension UIColor {
     }
     
     private static func getRandomHex() -> String {
-        var number = Int64.random(in: 0..<Constants.maxValueOfHex)
+        let number = Int64.random(in: 0..<Constants.maxValueOfHex)
         var hexString: String
         hexString = String(format:"%06x", number)
         return hexString

@@ -11,10 +11,15 @@ final class WrittenWishCell: UITableViewCell {
     // MARK: - Constants
     private enum Constants {
         static let wrapColor: UIColor = .white
-        static let wrapRadius: CGFloat = 5
+        static let wrapRadius: CGFloat = 10
         static let wrapOffsetV: CGFloat = 5
         static let wrapOffsetH: CGFloat = 10
         static let wishLabelOffset: CGFloat = 8
+        
+        static let shadowOpacity: Float = 0.2
+        static let shadowRadius: CGFloat = 10
+        static let shadowOffset: CGSize = CGSize(width: 3, height: 3)
+        static let shadowColor: CGColor = UIColor.black.cgColor
     }
     
     // MARK: - Fields
@@ -45,9 +50,16 @@ final class WrittenWishCell: UITableViewCell {
         
         wrap.backgroundColor = Constants.wrapColor
         wrap.layer.cornerRadius = Constants.wrapRadius
+        
+        wrap.layer.shadowOpacity = Constants.shadowOpacity
+        wrap.layer.shadowRadius = Constants.shadowRadius
+        wrap.layer.shadowOffset = Constants.shadowOffset
+        wrap.layer.shadowColor = Constants.shadowColor
+        
+        wrap.addSubview(wishLabel)
         wrap.pinVertical(to: self, Constants.wrapOffsetV)
         wrap.pinHorizontal(to: self, Constants.wrapOffsetH)
-        wrap.addSubview(wishLabel)
+        
         wishLabel.pin(to: wrap, Constants.wishLabelOffset)
         addTapGestureRecognizer()
     }

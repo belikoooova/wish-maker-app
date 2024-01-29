@@ -25,14 +25,14 @@ final class WishStoringViewController: UIViewController {
     
     // MARK: - Fields
     private let table: UITableView = UITableView(frame: .zero)
-    private var wishArray: [String] = ["I wish to add cells to the table"]
+    var wishArray: [String] = []
     private let defaults = UserDefaults.standard
     private var editingWishIndex: Int?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = WishMakerViewController.accentColor
         configureTable()
         loadWishes()
     }
@@ -46,7 +46,7 @@ final class WishStoringViewController: UIViewController {
     // MARK: - Configure Table
     private func configureTable() {
         view.addSubview(table)
-        table.backgroundColor = .black
+        table.backgroundColor = WishMakerViewController.accentColor
         table.dataSource = self
         table.separatorStyle = .none
         table.layer.cornerRadius = Constants.tableRadius
@@ -54,7 +54,6 @@ final class WishStoringViewController: UIViewController {
         table.pin(to: view, Constants.tableOffset)
         table.register(AddWishCell.self, forCellReuseIdentifier: AddWishCell.reuseId)
         table.register(WrittenWishCell.self, forCellReuseIdentifier: WrittenWishCell.reuseId)
-        // table.delegate = self
         defaults.array(forKey: Constants.wishesKey)
     }
 }

@@ -38,6 +38,7 @@ final class WishCalendarViewController: UIViewController {
     )
     private var events: [WishEventModel] = []
     private let defaults = UserDefaults.standard
+    private let calendarManager: CalendarManager = CalendarManager()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -90,6 +91,9 @@ final class WishCalendarViewController: UIViewController {
     
     private func addNewEvent(_ event: WishEventModel) {
         events.append(event)
+        if (!calendarManager.create(eventModel: event)) {
+            print("Error while saving event to the Calendar")
+        }
         collectionView.reloadData()
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(events) {
